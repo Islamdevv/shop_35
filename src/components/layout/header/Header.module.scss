@@ -1,0 +1,27 @@
+.header {
+  background: #acb5bd;
+  .content {
+    padding-block: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .logo {
+    }
+    .nav {
+      max-width: 700px;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      p {
+        font-size: 20px;
+        font-weight: 600;
+      }
+      .icons {
+        display: flex;
+        align-items: center;
+        gap: 25px;
+      }
+    }
+  }
+}
