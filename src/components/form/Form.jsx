@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import scss from "./Form.module.scss";
-import { name } from "../../../node_modules/rollup/dist/es/shared/node-entry";
+import { useProduct } from "../../context/ProductContext";
 const init = {
   name: "",
   price: "",
@@ -9,7 +9,9 @@ const init = {
   brand: "",
   type: "",
 };
-const Form = () => {
+
+const Form = ({ isEdit }) => {
+  const { addProduct } = useProduct();
   const [inputValues, setInputValues] = useState(init);
 
   function handleInp(e) {
@@ -20,6 +22,10 @@ const Form = () => {
       let obj = { ...inputValues, [e.target.name]: e.target.value };
       setInputValues(obj);
     }
+  }
+
+  function handleSubmit() {
+    addProduct(inputValues);
   }
 
   return (
@@ -49,17 +55,24 @@ const Form = () => {
           <option value="women">UNI</option>
         </select>
         <select onChange={handleInp} name="brand">
-          <option value="">DIOR</option>
-          <option value="">VERSACE</option>
-          <option value="">TOM FORD</option>
+          <option value="dior">DIOR</option>
+          <option value="versace">VERSACE</option>
+          <option value="tom_ford">TOM FORD</option>
         </select>
         <select onChange={handleInp} name="type">
-          <option value="">ELIXIR</option>
-          <option value="">COLOGNE</option>
-          <option value="">PERFUME</option>
-          <option value="">EAU DE TOILETTE</option>
+          <option value="elixir">ELIXIR</option>
+          <option value="cologne">COLOGNE</option>
+          <option value="perfume">PERFUME</option>
+          <option value="eau_de_toilette">EAU DE TOILETTE</option>
         </select>
-        <button className={scss.btn}>create</button>
+        <button
+          onClick={() => {
+            handleSubmit();
+          }}
+          className={scss.btn}
+        >
+          create
+        </button>
       </div>
     </div>
   );

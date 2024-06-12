@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import AdminPage from "../page/AdminPage";
 import EditPage from "../page/EditPage";
+import ListProduct from "../components/products/ListProduct";
 
 const MainRoutes = () => {
   const routes = [
@@ -27,7 +28,7 @@ const MainRoutes = () => {
     },
     {
       link: "/list",
-      element: "",
+      element: <ListProduct />,
       id: Date.now(),
     },
   ];
