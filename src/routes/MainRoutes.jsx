@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import AdminPage from "../page/AdminPage";
 import EditPage from "../page/EditPage";
 import ListProduct from "../components/products/ListProduct";
+import ProductPage from "../page/ProductPage";
 
 const MainRoutes = () => {
   const routes = [
@@ -17,8 +18,8 @@ const MainRoutes = () => {
       id: Date.now(),
     },
     {
-      link: "/home",
-      element: "",
+      link: "/filter_page",
+      element: <ProductPage />,
       id: Date.now(),
     },
     {

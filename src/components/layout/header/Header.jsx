@@ -13,8 +13,10 @@ const Header = () => {
           <h1 className={scss.logo}>LOGO</h1>
           <nav className={scss.nav}>
             <p onClick={() => navigate("/admin")}>Admin</p>
-            <p>HOME</p>
             <Link to="/list">
+              <p>HOME</p>
+            </Link>
+            <Link to="/filter_page">
               <p>PRODUCTS</p>
             </Link>
             <p>ABOUT</p>

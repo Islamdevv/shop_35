@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import scss from "./Form.module.scss";
 import { useProduct } from "../../context/ProductContext";
+import { useNavigate, useParams } from "react-router-dom";
 const init = {
   name: "",
   price: "",
@@ -11,8 +12,17 @@ const init = {
 };
 
 const Form = ({ isEdit }) => {
-  const { addProduct } = useProduct();
+  const { addProduct, editProduct } = useProduct();
   const [inputValues, setInputValues] = useState(init);
+  const { oneProduct } = useProduct();
+  const navigate = useNavigate();
+  const { id } = useParams();
+
+  useEffect(() => {
+    if (oneProduct && isEdit) {
+      setInputValues(oneProduct);
+    }
+  }, [oneProduct]);
 
   function handleInp(e) {
     if (e.target.name === "price") {
@@ -28,22 +38,28 @@ const Form = ({ isEdit }) => {
     addProduct(inputValues);
   }
 
+  function handleSave() {
+    editProduct(id, inputValues);
+  }
   return (
     <div className={scss.form}>
       <div className={scss.content}>
         <input
+          value={inputValues.name}
           onChange={handleInp}
           name="name"
           type="text"
           placeholder="name"
         />
         <input
+          value={inputValues.price}
           onChange={handleInp}
           name="price"
           type="text"
           placeholder="price"
         />
         <input
+          value={inputValues.image}
           onChange={handleInp}
           name="image"
           type="text"
@@ -65,14 +81,26 @@ const Form = ({ isEdit }) => {
           <option value="perfume">PERFUME</option>
           <option value="eau_de_toilette">EAU DE TOILETTE</option>
         </select>
-        <button
-          onClick={() => {
-            handleSubmit();
-          }}
-          className={scss.btn}
-        >
-          create
-        </button>
+        {isEdit ? (
+          <button
+            onClick={() => {
+              handleSave();
+              navigate("/list");
+            }}
+            className={scss.btn}
+          >
+            save
+          </button>
+        ) : (
+          <button
+            onClick={() => {
+              handleSubmit();
+            }}
+            className={scss.btn}
+          >
+            create
+          </button>
+        )}
       </div>
     </div>
   );
